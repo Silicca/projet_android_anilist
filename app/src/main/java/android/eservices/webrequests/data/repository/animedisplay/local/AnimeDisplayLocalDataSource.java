@@ -21,6 +21,18 @@ public class AnimeDisplayLocalDataSource {
         return animeDatabase.animeDao().loadFavorites();
     }
 
+    public Flowable<List<AnimeEntity>> loadDetails(String id) {
+        return animeDatabase.animeDao().loadDetails(id);
+    }
+
+    public Completable deleteAnimeDetails(String id) {
+        return animeDatabase.animeDao().deleteAnimeDetails(id);
+    }
+
+    public Completable addAnimeDetails(AnimeEntity animeEntity) {
+        return animeDatabase.animeDao().addAnimeDetails(animeEntity);
+    }
+
     public Completable addAnimeToFavorites(AnimeEntity animeEntity) {
         return animeDatabase.animeDao().addAnimeToFavorites(animeEntity);
     }

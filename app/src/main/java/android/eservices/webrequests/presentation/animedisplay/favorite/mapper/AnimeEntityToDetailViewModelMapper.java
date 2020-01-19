@@ -12,15 +12,15 @@ public class AnimeEntityToDetailViewModelMapper {
     private AnimeDetailViewModel map(AnimeEntity animeEntity) {
         AnimeDetailViewModel animeItemViewModel = new AnimeDetailViewModel();
         animeItemViewModel.setAnimeTitle(animeEntity.getTitle());
+        animeItemViewModel.setAnimeTitleJapanese(animeEntity.getTitleJapanese());
         animeItemViewModel.setAnimeId(animeEntity.getId());
         animeItemViewModel.setAnimeImageUrl(animeEntity.getImageUrl());
         if (animeEntity.getSynopsis() != null) {
             animeItemViewModel.setAnimeSynopsis(Html.fromHtml(animeEntity.getSynopsis()).toString());
         }
-        animeItemViewModel.setAnimeScore(animeEntity.getScore());
-        animeItemViewModel.setAnimeEpisodes(animeEntity.getEpisodes());
-        animeItemViewModel.setAnimeStartDate("Started in " + animeEntity.getStartDate());
-        animeItemViewModel.setAnimeEndDate("Ended in " + animeEntity.getEndDate());
+        animeItemViewModel.setAnimeScore("Score : "+animeEntity.getScore()+"/10");
+        animeItemViewModel.setAnimeEpisodes("Number of episodes : "+animeEntity.getEpisodes());
+        animeItemViewModel.setAnimeDuration(animeEntity.getDuration());
         animeItemViewModel.setAnimeType("Type : " + animeEntity.getType());
         return animeItemViewModel;
     }

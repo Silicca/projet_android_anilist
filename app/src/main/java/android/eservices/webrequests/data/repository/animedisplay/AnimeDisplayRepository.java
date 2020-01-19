@@ -15,7 +15,13 @@ public interface AnimeDisplayRepository {
 
     Flowable<List<AnimeEntity>> getFavoriteAnimes();
 
+    Flowable<List<AnimeEntity>> getDetails(String id);
+
+    Completable removeAnimeDetails(String animeId);
+
     Completable addAnimeToFavorites(String animeId);
 
     Completable removeAnimeFromFavorites(String animeId);
+
+    Completable addAnimeDetails(String animeId);
 }

@@ -32,7 +32,7 @@
             android:layout_marginLeft="10dp"
             android:textSize="13sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/anime_characters_textview"
+            app:layout_constraintBottom_toTopOf="@id/anime_type_textview"
             app:layout_constraintLeft_toRightOf="@id/anime_icon_imageview"
             app:layout_constraintRight_toLeftOf="@id/favorite_switch"
             app:layout_constraintTop_toTopOf="parent"
@@ -40,7 +40,7 @@
             tools:text="My anime title" />
 
         <TextView
-            android:id="@+id/anime_characters_textview"
+            android:id="@+id/anime_type_textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="10sp"
@@ -49,8 +49,7 @@
             app:layout_constraintTop_toBottomOf="@id/anime_title_textview"
             app:layout_constraintBottom_toTopOf="@id/anime_description_textview"
             app:layout_constraintVertical_chainStyle="packed"
-            tools:text="My author 1, my author 2" />
-
+            tools:text="Type" />
 
         <TextView
             android:id="@+id/anime_description_textview"
@@ -60,13 +59,13 @@
             android:textSize="10sp"
             app:layout_constraintLeft_toLeftOf="@id/anime_title_textview"
             app:layout_constraintRight_toLeftOf="@id/favorite_switch"
-            app:layout_constraintTop_toBottomOf="@id/anime_characters_textview"
-            app:layout_constraintBottom_toTopOf="@id/anime_published_textview"
+            app:layout_constraintTop_toBottomOf="@id/anime_type_textview"
+            app:layout_constraintBottom_toTopOf="@id/anime_episodes_textview"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="Description" />
 
         <TextView
-            android:id="@+id/anime_published_textview"
+            android:id="@+id/anime_episodes_textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -74,20 +73,20 @@
             app:layout_constraintLeft_toLeftOf="@id/anime_title_textview"
             app:layout_constraintRight_toLeftOf="@id/favorite_switch"
             app:layout_constraintTop_toBottomOf="@id/anime_description_textview"
-            app:layout_constraintBottom_toTopOf="@id/anime_language_textview"
+            app:layout_constraintBottom_toTopOf="@id/anime_score_textview"
             app:layout_constraintVertical_chainStyle="packed"
-            tools:text="Published in " />
+            tools:text="Episodes" />
 
         <TextView
-            android:id="@+id/anime_language_textview"
+            android:id="@+id/anime_score_textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="@id/anime_title_textview"
             app:layout_constraintRight_toLeftOf="@id/favorite_switch"
-            app:layout_constraintTop_toBottomOf="@id/anime_published_textview"
-            tools:text="Language : FR" />
+            app:layout_constraintTop_toBottomOf="@id/anime_episodes_textview"
+            tools:text="Score" />
 
         <Switch
             android:id="@+id/favorite_switch"

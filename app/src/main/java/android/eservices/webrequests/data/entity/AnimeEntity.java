@@ -19,20 +19,19 @@ public class AnimeEntity {
 
     public String title;
 
+    @ColumnInfo(name = "title_japanese")
+    public String titleJapanese;
+
     @ColumnInfo(name = "image_url")
     private String imageUrl;
 
     private String synopsis;
     private String type;
-    private int episodes;
-    private double score;
+    private String episodes;
+    private String score;
     private boolean favorite = false;
 
-    @ColumnInfo(name = "start_date")
-    private String startDate;
-
-    @ColumnInfo(name = "end_date")
-    private String endDate;
+    private String duration;
 
     public String getId() {
         return id;
@@ -46,9 +45,16 @@ public class AnimeEntity {
         return title;
     }
 
+    public void setTitleJapanese(String title) {
+        this.titleJapanese = titleJapanese;
+    }
+
+    public String getTitleJapanese() {
+        return titleJapanese;
+    }
+
     public void setTitle(String title) {
         this.title = title;
-        Log.d(AnimeEntity.class.getName(),"Title in BDD");
     }
 
     public void setFavorite(boolean favorite) {
@@ -91,33 +97,27 @@ public class AnimeEntity {
         this.type = type;
     }
 
-    public int getEpisodes() {
+    public String getEpisodes() {
         return episodes;
     }
 
-    public void setEpisodes(int episodes) {
+    public void setEpisodes(String episodes) {
         this.episodes = episodes;
     }
 
-    public double getScore() {
+    public String getScore() {
         return score;
     }
 
-    public void setScore(double score) {
+    public void setScore(String score) {
         this.score = score;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public String getDuration() {
+        return duration;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getEndDate() { return endDate; }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 }

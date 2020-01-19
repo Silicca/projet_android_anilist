@@ -97,4 +97,5 @@ public class AnimeSearchPresenter implements AnimeSearchContract.Presenter {
         compositeDisposable.dispose();
         view = null;
     }
+
 }

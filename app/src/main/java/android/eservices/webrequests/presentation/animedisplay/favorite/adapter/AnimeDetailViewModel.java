@@ -5,12 +5,12 @@ public class AnimeDetailViewModel {
     private String animeId;
     private String animeImageUrl;
     private String animeTitle;
+    private String animeTitleJapanese;
     private String animeScore;
-    private String animeStartDate;
-    private String animeEndDate;
     private String animeType;
     private String animeSynopsis;
     private String animeEpisodes;
+    private String animeDuration;
 
     public String getAnimeImageUrl() {
         return animeImageUrl;
@@ -32,9 +32,7 @@ public class AnimeDetailViewModel {
         return animeScore;
     }
 
-    public void setAnimeScore(double animeScore) {
-        this.animeScore = Double.toString(animeScore);
-    }
+    public void setAnimeScore(String animeScore) { this.animeScore = animeScore; }
 
     public String getAnimeId() {
         return animeId;
@@ -42,22 +40,6 @@ public class AnimeDetailViewModel {
 
     public void setAnimeId(String animeId) {
         this.animeId = animeId;
-    }
-
-    public String getAnimeStartDate() {
-        return animeStartDate;
-    }
-
-    public void setAnimeStartDate(String animeStartDate) {
-        this.animeStartDate = animeStartDate;
-    }
-
-    public String getAnimeEndDate() {
-        return animeEndDate;
-    }
-
-    public void setAnimeEndDate(String animeEndDate) {
-        this.animeEndDate = animeEndDate;
     }
 
     public String getAnimeType() {
@@ -80,7 +62,19 @@ public class AnimeDetailViewModel {
         return animeEpisodes;
     }
 
-    public void setAnimeEpisodes(int animeEpisodes) {
-        this.animeEpisodes = Integer.toString(animeEpisodes);
+    public void setAnimeEpisodes(String animeEpisodes) { this.animeEpisodes = animeEpisodes; }
+
+    public String getAnimeTitleJapanese() {
+        return animeTitleJapanese;
     }
+
+    public void setAnimeTitleJapanese(String animetitleJapanese) {
+        this.animeTitleJapanese = animetitleJapanese;
+    }
+
+    public String getAnimDuration() {
+        return animeDuration;
+    }
+
+    public void setAnimeDuration(String animeDuration) { this.animeDuration = animeDuration; }
 }

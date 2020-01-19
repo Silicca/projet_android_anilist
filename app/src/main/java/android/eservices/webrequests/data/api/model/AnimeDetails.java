@@ -2,12 +2,10 @@ package android.eservices.webrequests.data.api.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Anime {
+public class AnimeDetails {
 
     @SerializedName("mal_id")
     private String id;
-
-    private AnimeDetails animeDetails;
 
     private String title;
 
@@ -22,6 +20,7 @@ public class Anime {
     private String episodes;
     private String score;
 
+
     private String duration;
 
     private boolean isFavorite;
@@ -29,8 +28,6 @@ public class Anime {
     public String getId() {
         return id;
     }
-
-    public AnimeDetails getAnimeDetails(){ return animeDetails;}
 
     public void setFavorite() {
         if (isFavorite==true){

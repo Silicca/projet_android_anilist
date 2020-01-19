@@ -21,9 +21,18 @@ public interface AnimeDao {
     @Insert
     public Completable addAnimeToFavorites(AnimeEntity animeEntity);
 
+    @Insert
+    public Completable addAnimeDetails(AnimeEntity animeEntity);
+
     @Query("DELETE FROM AnimeEntity WHERE mal_id = :id")
     public Completable deleteAnimeFromFavorites(String id);
 
-    @Query("SELECT mal_id from AnimeEntity")
+    @Query("DELETE FROM AnimeEntity WHERE mal_id = :id")
+    public Completable deleteAnimeDetails(String id);
+
+    @Query("SELECT * from AnimeEntity WHERE mal_id =:id")
+    Flowable<List<AnimeEntity>> loadDetails(String id);
+
+    @Query("SELECT mal_id from AnimeEntity WHERE favorite = 'true'")
     Single<List<String>> getFavoriteIdList();
 }

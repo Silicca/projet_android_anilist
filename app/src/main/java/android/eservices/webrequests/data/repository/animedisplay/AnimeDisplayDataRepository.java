@@ -52,6 +52,16 @@ public class AnimeDisplayDataRepository implements AnimeDisplayRepository {
     }
 
     @Override
+    public Flowable<List<AnimeEntity>> getDetails(String id) {
+        return animeDisplayLocalDataSource.loadDetails(id);
+    }
+
+    @Override
+    public Completable removeAnimeDetails(String animeId) {
+        return animeDisplayLocalDataSource.deleteAnimeDetails(animeId);
+    }
+
+    @Override
     public Completable addAnimeToFavorites(String animeId) {
         return animeDisplayRemoteDataSource.getAnimeDetails(animeId)
                 .map(new Function<Anime, AnimeEntity>() {
@@ -71,5 +81,22 @@ public class AnimeDisplayDataRepository implements AnimeDisplayRepository {
     @Override
     public Completable removeAnimeFromFavorites(String animeId) {
         return animeDisplayLocalDataSource.deleteAnimeFromFavorites(animeId);
+    }
+
+    @Override
+    public Completable addAnimeDetails(String animeId) {
+        return animeDisplayRemoteDataSource.getAnimeDetails(animeId)
+                .map(new Function<Anime, AnimeEntity>() {
+                    @Override
+                    public AnimeEntity apply(Anime anime) throws Exception {
+                        return animeToAnimeEntityMapper.map(anime);
+                    }
+                })
+                .flatMapCompletable(new Function<AnimeEntity, CompletableSource>() {
+                    @Override
+                    public CompletableSource apply(AnimeEntity animeEntity) throws Exception {
+                        return animeDisplayLocalDataSource.addAnimeDetails(animeEntity);
+                    }
+                });
     }
 }

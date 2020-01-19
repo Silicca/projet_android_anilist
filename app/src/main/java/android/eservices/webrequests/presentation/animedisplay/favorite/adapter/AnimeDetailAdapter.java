@@ -26,8 +26,6 @@ public class AnimeDetailAdapter extends RecyclerView.Adapter<AnimeDetailAdapter.
         private TextView typeTextView;
         private TextView synopsisTextView;
         private TextView episodesTextView;
-        private TextView startDateTextView;
-        private TextView endDateTextView;
         private ImageView imageUrlView;
         private View v;
         private AnimeDetailViewModel animeDetailViewModel;
@@ -38,12 +36,10 @@ public class AnimeDetailAdapter extends RecyclerView.Adapter<AnimeDetailAdapter.
             super(v);
             this.v = v;
             titleTextView = v.findViewById(R.id.anime_title_textview);
-            scoreTextView = v.findViewById(R.id.anime_characters_textview);
-            typeTextView = v.findViewById(R.id.anime_language_textview);
+            typeTextView = v.findViewById(R.id.anime_type_textview);
+            scoreTextView = v.findViewById(R.id.anime_score_textview);
             synopsisTextView = v.findViewById(R.id.anime_description_textview);
-            //episodesTextView = v.findViewById(R.id.anime_episodes_textview);
-            startDateTextView = v.findViewById(R.id.anime_published_textview);
-            //endDateTextView = v.findViewById(R.id.anime_endate_textview);
+            episodesTextView = v.findViewById(R.id.anime_episodes_textview);
             imageUrlView = v.findViewById(R.id.anime_icon_imageview);
             favoriteSwitch = v.findViewById(R.id.favorite_switch);
             setupListeners();
@@ -74,8 +70,6 @@ public class AnimeDetailAdapter extends RecyclerView.Adapter<AnimeDetailAdapter.
             } else {
                 synopsisTextView.setVisibility(View.VISIBLE);
             }
-            startDateTextView.setText(animeDetailViewModel.getAnimeStartDate());
-            endDateTextView.setText(animeDetailViewModel.getAnimeEndDate());
             Glide.with(v)
                     .load(animeDetailViewModel.getAnimeImageUrl())
                     .centerCrop()

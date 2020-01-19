@@ -26,5 +26,6 @@ public interface AnimeSearchContract {
         void removeAnimeFromFavorites(String animeId);
 
         void detachView();
+
     }
 }

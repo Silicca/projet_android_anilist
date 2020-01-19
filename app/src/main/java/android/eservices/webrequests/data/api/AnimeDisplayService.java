@@ -13,6 +13,6 @@ public interface AnimeDisplayService {
     @GET("search/anime")
     Single<AnimeSearchResponse> searchAnimes(@Query("q") String keywords);
 
-    @GET("search/anime/{id}")
+    @GET("anime/{id}")
     Single<Anime> getAnime(@Path("id") String animeId);
 }

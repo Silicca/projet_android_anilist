@@ -5,6 +5,8 @@ public class AnimeItemViewModel {
     private String animeId;
     private String iconUrl;
     private String animeTitle;
+    private String animeType;
+    private String animeTitleJapanese;
     private boolean isFavorite;
 
     public String getIconUrl() {
@@ -19,9 +21,13 @@ public class AnimeItemViewModel {
         return animeTitle;
     }
 
-    public void setAnimeTitle(String animeTitle) {
-        this.animeTitle = animeTitle;
+    public void setAnimeTitle(String animeTitle) { this.animeTitle = animeTitle; }
+
+    public String getAnimeTitleJapanese() {
+        return animeTitleJapanese;
     }
+
+    public void setAnimeTitleJapanese(String animeTitleJapanese) { this.animeTitleJapanese = animeTitleJapanese; }
 
     public String getAnimeId() {
         return animeId;
@@ -37,5 +43,13 @@ public class AnimeItemViewModel {
 
     public void setFavorite(boolean favorite) {
         isFavorite = favorite;
+    }
+
+    public String getAnimeType() {
+        return animeType;
+    }
+
+    public void setFavorite(String animeType) {
+        this.animeType = animeType;
     }
 }

@@ -12,12 +12,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,13 +42,15 @@ public class SearchFragment extends Fragment implements AnimeSearchContract.View
     private RecyclerView recyclerView;
     private AnimeAdapter animeAdapter;
     private ProgressBar progressBar;
+    private SearchView.OnQueryTextListener queryListener;
+    private boolean listDisplay = true;
+    private RecyclerView.LayoutManager layoutManager;
+    private String query = null;
 
     private SearchFragment() {
     }
 
-    public static SearchFragment newInstance() {
-        return new SearchFragment();
-    }
+    public static SearchFragment newInstance() { return new SearchFragment(); }
 
     @Nullable
     @Override
@@ -57,31 +63,49 @@ public class SearchFragment extends Fragment implements AnimeSearchContract.View
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setupSearchView();
         setupRecyclerView();
+        setupSearchView();
         progressBar = rootView.findViewById(R.id.progress_bar);
-
+        Switch aSwitch = rootView.findViewById(R.id.switchDisplay);
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                switchDisplay();
+            }
+        });
         animeSearchPresenter = new AnimeSearchPresenter(FakeDependencyInjection.getAnimeDisplayRepository(), new AnimeToViewModelMapper());
         animeSearchPresenter.attachView(this);
     }
 
+    public void switchDisplay(){
+        this.listDisplay = !this.listDisplay;
+        this.setupRecyclerView();
+        this.updateSearchView(query);
+    }
+
+    private void updateSearchView(String s) {
+        searchView = rootView.findViewById(R.id.search_view);
+        queryListener.onQueryTextChange(s);
+    }
+
     private void setupSearchView() {
         searchView = rootView.findViewById(R.id.search_view);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        this.queryListener = new SearchView.OnQueryTextListener() {
             private Timer timer = new Timer();
 
             @Override
-            public boolean onQueryTextSubmit(String query) {
+            public boolean onQueryTextSubmit(String s) {
                 return false;
             }
 
             @Override
-            public boolean onQueryTextChange(final String s) {
+            public boolean onQueryTextChange(String s) {
                 if (s.length() == 0) {
                     animeSearchPresenter.cancelSubscription();
                     progressBar.setVisibility(View.GONE);
                 } else {
                     progressBar.setVisibility(View.VISIBLE);
+                    query = s;
                     timer.cancel();
                     timer = new Timer();
                     int sleep = 350;
@@ -94,20 +118,28 @@ public class SearchFragment extends Fragment implements AnimeSearchContract.View
                     timer.schedule(new TimerTask() {
                         @Override
                         public void run() {
-                            animeSearchPresenter.searchAnimes(s);
+                            animeSearchPresenter.searchAnimes(query);
                         }
                     }, sleep);
                 }
                 return true;
             }
-        });
+        };
+        searchView.setOnQueryTextListener(queryListener);
     }
 
     private void setupRecyclerView() {
-        recyclerView = rootView.findViewById(R.id.recycler_view);
-        animeAdapter = new AnimeAdapter(this);
-        recyclerView.setAdapter(animeAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        this.recyclerView = rootView.findViewById(R.id.recycler_view);
+        this.layoutManager = new LinearLayoutManager(getContext());
+        this.animeAdapter = new AnimeAdapter(this);
+
+        if(this.listDisplay){
+            this.recyclerView.setLayoutManager(this.layoutManager);
+        }else{
+            this.recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        }
+
+        this.recyclerView.setAdapter(this.animeAdapter);
     }
 
     @Override

@@ -22,16 +22,19 @@ public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.AnimeViewHol
 
     public static class AnimeViewHolder extends RecyclerView.ViewHolder {
         private TextView titleTextView;
+        private TextView typeTextView;
         private ImageView iconImageView;
         private View v;
         private AnimeItemViewModel animeItemViewModel;
         private AnimeActionInterface animeActionInterface;
         private Switch favoriteSwitch;
+        private String animeId;
 
         public AnimeViewHolder(View v, final AnimeActionInterface animeActionInterface) {
             super(v);
             this.v = v;
             titleTextView = v.findViewById(R.id.anime_title_textview);
+            typeTextView = v.findViewById(R.id.anime_type_textview);
             iconImageView = v.findViewById(R.id.anime_icon_imageview);
             favoriteSwitch = v.findViewById(R.id.favorite_switch);
             this.animeActionInterface = animeActionInterface;
@@ -42,7 +45,8 @@ public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.AnimeViewHol
             favoriteSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    animeActionInterface.onFavoriteToggle(animeItemViewModel.getAnimeId(), b);
+                    animeId = animeItemViewModel.getAnimeId();
+                    animeActionInterface.onFavoriteToggle(animeId, b);
                 }
             });
         }
@@ -50,6 +54,7 @@ public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.AnimeViewHol
         void bind(AnimeItemViewModel animeItemViewModel) {
             this.animeItemViewModel = animeItemViewModel;
             titleTextView.setText(animeItemViewModel.getAnimeTitle());
+            typeTextView.setText((animeItemViewModel.getAnimeType()));
             favoriteSwitch.setChecked(animeItemViewModel.isFavorite());
             Glide.with(v)
                     .load(animeItemViewModel.getIconUrl())
@@ -57,9 +62,7 @@ public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.AnimeViewHol
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .circleCrop()
                     .into(iconImageView);
-
         }
-
     }
 
     private List<AnimeItemViewModel> animeItemViewModelList;

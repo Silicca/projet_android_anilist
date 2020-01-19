@@ -12,6 +12,7 @@ public class AnimeToViewModelMapper {
     private AnimeItemViewModel map(Anime anime) {
         AnimeItemViewModel animeItemViewModel = new AnimeItemViewModel();
         animeItemViewModel.setAnimeTitle(anime.getTitle());
+        animeItemViewModel.setAnimeTitleJapanese(anime.getTitleJapanese());
         animeItemViewModel.setAnimeId(anime.getId());
         animeItemViewModel.setIconUrl(anime.getImageUrl());
         animeItemViewModel.setFavorite(anime.isFavorite());
